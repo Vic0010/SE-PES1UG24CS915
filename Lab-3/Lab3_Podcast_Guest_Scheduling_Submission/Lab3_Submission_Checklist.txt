@@ -1,0 +1,35 @@
+LAB 3 SUBMISSION CHECKLIST
+System: Podcast Guest Scheduling & Outline Builder
+
+REQUIRED:
+1. Component_Diagram.pdf
+2. Component_Diagram.png
+3. Architecture_Justification.docx
+4. Architecture_Justification.pdf
+
+DIAGRAM CHECK:
+- Layered Architecture selected
+- 5 internal components
+- 6 interfaces (more than required minimum of 4)
+- Provided and required interface notation shown
+- Data flow and component interactions shown
+- External Calendar Service shown
+- Clean spacing and non-overlapping connector routes
+
+COMPONENTS:
+1. User Interface Component
+2. Scheduling & Booking Component
+3. Outline Management Component
+4. Run-of-Show Generator Component
+5. Data & Calendar Service Component
+
+INTERFACES:
+1. Booking API
+2. Outline API
+3. Booking Data API
+4. Calendar API
+5. Approved Outline API
+6. Production Notes API
+
+FINAL ACTION:
+Submit the diagram and written justification through the Lab3 location in GitHub as instructed by the handout.
