@@ -1,0 +1,197 @@
+Lab 4 – Vibe Coding
+Number Guessing Repair Lab – LLM Chat History
+
+Student: Vikas R
+SRN: PES1UG24CS915
+Project: Number Guessing Repair Lab
+
+INITIAL PROBLEM
+
+Student:
+I have a Number Guessing Repair Lab using Pygame. The project has one deliberate bug and three features to implement:
+1. Fix the empty input crash.
+2. Add dynamic search range display.
+3. Add recent guess history.
+4. Add maximum attempts and Game Over state.
+
+I need to debug and complete the project using an LLM.
+
+LLM:
+The main game logic is in game/game_engine.py. The main.py file only initializes Pygame, creates the GameEngine, handles events, updates the game, and renders it.
+
+DEBUGGING THE EMPTY INPUT BUG
+
+Student:
+The original game crashes when I press Enter without entering a number.
+
+LLM:
+The problem is the following line in game_engine.py:
+
+guess = int(self.input_box.text)
+
+When the input box is empty, self.input_box.text is an empty string. Calling int("") causes a ValueError.
+
+The input should be checked before converting it to an integer.
+
+Student:
+Fix it.
+
+LLM:
+Add an empty-input check before the integer conversion:
+
+if not self.input_box.text.strip():
+    self.feedback_msg = "WARNING: Enter a number first!"
+    self.feedback_color = (255, 220, 80)
+    return
+
+Then perform:
+
+guess = int(self.input_box.text)
+
+The return ensures that an empty submission does not consume an attempt.
+
+FIXING AN INDENTATION ERROR
+
+Student:
+After making the change, I got:
+
+IndentationError: expected an indented block after function definition
+
+LLM:
+The code was incorrectly indented. The entire submit_guess() function needs to be indented inside the GameEngine class.
+
+The corrected structure is:
+
+def submit_guess(self):
+    if self.game_won:
+        return
+
+    if not self.input_box.text.strip():
+        self.feedback_msg = "WARNING: Enter a number first!"
+        self.feedback_color = (255, 220, 80)
+        return
+
+    guess = int(self.input_box.text)
+
+Student:
+I still got an indentation problem.
+
+LLM:
+Instead of correcting individual spaces, replace the complete submit_guess() function with a correctly indented version.
+
+REVIEWING THE OTHER FILES
+
+Student:
+I uploaded main.py, game_engine.py, and text_box.py. Which files need to be changed?
+
+LLM:
+main.py is already correct. It creates the GameEngine and forwards events to it.
+
+text_box.py is also already suitable. It handles digit input, backspace, clearing the input, active/inactive state, and rendering.
+
+The main changes can be made in game/game_engine.py.
+
+Therefore:
+main.py        -> unchanged
+text_box.py    -> unchanged
+game_engine.py -> modified
+
+IMPLEMENTING THE REQUIRED FEATURES
+
+Student:
+Now give me the properly completed code with all four tasks.
+
+LLM:
+The completed game_engine.py was updated to include:
+
+TASK 1 – EMPTY INPUT
+
+The program checks for an empty input before converting it to an integer:
+
+if not self.input_box.text.strip():
+    self.feedback_msg = "WARNING: Enter a number first!"
+    self.feedback_color = (255, 220, 80)
+    return
+
+This prevents the crash and does not increase the attempt count.
+
+TASK 2 – DYNAMIC SEARCH RANGE
+
+The game maintains:
+
+self.min_range = 1
+self.max_range = 100
+
+After a low guess, the minimum boundary is updated to guess + 1.
+
+After a high guess, the maximum boundary is updated to guess - 1.
+
+The game displays:
+
+Possible Range: minimum - maximum
+
+TASK 3 – GUESS HISTORY
+
+A history list was added:
+
+self.guess_history = []
+
+Each guess is stored with its result, such as TOO LOW or TOO HIGH, together with a corresponding display color.
+
+The game displays the recent guesses on screen.
+
+TASK 4 – MAXIMUM ATTEMPTS
+
+A maximum attempt limit was added:
+
+MAX_ATTEMPTS = 7
+
+After seven unsuccessful attempts, the game enters the Game Over state.
+
+The game displays the hidden number and allows the player to restart using R.
+
+FINAL TESTING
+
+Student:
+The completed code is working fine.
+
+LLM:
+The final game now supports:
+
+Empty input:
+Warning displayed
+No crash
+No attempt consumed
+
+Valid guesses:
+TOO LOW / TOO HIGH / CORRECT
+Attempt counter updated
+Search range narrowed
+Guess added to history
+
+Maximum attempts:
+GAME OVER
+Hidden number revealed
+Press R to restart
+
+The R key resets the secret number, attempts, search range, guess history, feedback, and game state.
+
+FINAL PROJECT STATUS
+
+Project structure:
+
+number_guess/
+├── game/
+│   ├── game_engine.py
+│   └── text_box.py
+├── main.py
+└── README.md
+
+Modified:
+game/game_engine.py
+
+Unchanged:
+main.py
+game/text_box.py
+
+The game was tested after the changes and the required features were working correctly.
