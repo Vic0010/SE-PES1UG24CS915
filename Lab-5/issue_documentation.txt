@@ -1,0 +1,20 @@
+LAB 5: STATIC CODE ANALYSIS
+
+Project: Hostel Room Allocation
+
+Tools Used: Pylint, Bandit, Flake8
+
+| Issue | Tool | Fix Applied |
+|---|---|---|
+| Missing module and function docstrings | Pylint | Added appropriate docstrings |
+| Mutable default argument | Pylint | Replaced empty list default with None |
+| Incorrect room capacity check | Code Review | Changed the comparison to prevent over-allocation |
+| Unsafe YAML loading | Bandit | Replaced yaml.load() with yaml.safe_load() |
+| Hardcoded database password | Bandit | Read credentials from environment variables |
+| Flask debug mode enabled | Bandit | Disabled debug mode |
+| Insecure remote logging configuration | Bandit | Disabled remote logging configuration |
+| Formatting violations | Flake8 | Corrected formatting and spacing |
+
+RESULT
+
+The code was revised to improve readability, maintainability, and security. The final Pylint score achieved was 10.00/10. The program was executed to verify its main functionality.
